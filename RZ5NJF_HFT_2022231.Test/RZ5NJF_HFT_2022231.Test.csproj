@@ -7,7 +7,13 @@
   <ItemGroup>
     <ProjectReference Include="..\RZ5NJF_HFT_2022231.Logic\RZ5NJF_HFT_2022231.Logic.csproj" />
     <ProjectReference Include="..\RZ5NJF_HFT_2022231.Models\RZ5NJF_HFT_2022231.Models.csproj" />
-    <ProjectReference Include="..\RZ5NJF_HFT_2022231.Repository\RZ5NJF_HFT_2022231.Repository.csproj" />
+    <ProjectReference Include="..\RZ5NJF_HFT_2022231.Repository\RZ5NJF_HFT_2022231.Repository.csproj" /> 
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+		<PackageReference Include="NUnit" Version="3.13.3" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.3.0" />
+	</ItemGroup>
+	
 </Project>
