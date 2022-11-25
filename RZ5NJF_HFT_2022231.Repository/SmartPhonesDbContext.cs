@@ -12,7 +12,7 @@ namespace RZ5NJF_HFT_2022231.Repository
         }
 
         public DbSet<Company> Companies { get; set; }
-        public DbSet<System.OperatingSystem> OperatingSystems { get; set; }
+        public DbSet<SmartPhoneOS> SmartPhoneOSes { get; set; }
         public DbSet<Phone> Phones { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,7 +22,17 @@ namespace RZ5NJF_HFT_2022231.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Phone>(phone => phone
+            .HasOne<Company>(phone => phone.Company)
+            .WithMany(company => company.Phones)
+            .HasForeignKey(phone => phone.CompanyID)
+            .OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<Phone>(phone => phone
+            .HasOne<SmartPhoneOS>(phone => phone.SmartPhoneOS)
+            .WithMany(os => os.Phones)
+            .HasForeignKey(phone => phone.SmartPhoneOSID)
+            .OnDelete(DeleteBehavior.Cascade));
         }
     }
 }

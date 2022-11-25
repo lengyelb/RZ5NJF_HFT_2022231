@@ -34,11 +34,17 @@ namespace RZ5NJF_HFT_2022231.Models
         public bool WirelessCharging { get; set; }
 
 
-        [ForeignKey(nameof(OperatingSystem))]
-        public int OperatingSystemID { get; set; }
+        [ForeignKey(nameof(SmartPhoneOS))]
+        public int SmartPhoneOSID { get; set; }
+
+        [NotMapped]
+        public virtual SmartPhoneOS SmartPhoneOS { get; set; }
 
         [ForeignKey(nameof(Company))]
         public int CompanyID { get; set; }
+
+        [NotMapped]
+        public virtual Company Company { get; set; }
         #endregion
     }
 }
