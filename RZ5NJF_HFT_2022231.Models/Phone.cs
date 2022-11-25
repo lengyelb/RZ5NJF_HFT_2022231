@@ -32,6 +32,13 @@ namespace RZ5NJF_HFT_2022231.Models
         public int ChargingSpeed { get; set; }
 
         public bool WirelessCharging { get; set; }
+
+
+        [ForeignKey(nameof(OperatingSystem))]
+        public int OperatingSystemID { get; set; }
+
+        [ForeignKey(nameof(Company))]
+        public int CompanyID { get; set; }
         #endregion
     }
 }

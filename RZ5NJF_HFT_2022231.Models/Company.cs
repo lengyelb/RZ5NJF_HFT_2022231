@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Models
 {
-    internal class Company
+    public class Company
     {
         public Company()
         {
@@ -38,6 +38,7 @@ namespace RZ5NJF_HFT_2022231.Models
         public string Website { get; set; }
 
         public DateTime Founded { get; set; }
+
         #endregion
 
 

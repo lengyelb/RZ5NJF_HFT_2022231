@@ -29,6 +29,7 @@ namespace RZ5NJF_HFT_2022231.Client
             }
             #endregion
 
+            #region Menu
             var phones_menu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => Read("phone"))
                 .Add("Create", () => Create("phone"))
@@ -58,6 +59,7 @@ namespace RZ5NJF_HFT_2022231.Client
                .Add("Exit", ConsoleMenu.Close);
 
             main_menu.Show();
+            #endregion
         }
     }
 }

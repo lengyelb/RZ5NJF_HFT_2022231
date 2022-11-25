@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Models
 {
-    internal class OpaeratingSystem
+    public class OperatingSystem
     {
-        public OpaeratingSystem()
+        public OperatingSystem()
         {
         }
 
