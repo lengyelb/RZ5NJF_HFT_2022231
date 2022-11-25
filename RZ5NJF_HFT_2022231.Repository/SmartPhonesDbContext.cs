@@ -10,7 +10,7 @@ namespace RZ5NJF_HFT_2022231.Repository
     {
         protected SmartPhonesDbContext()
         {
-            Database.EnsureCreated();
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Company> Companies { get; set; }
@@ -25,18 +25,18 @@ namespace RZ5NJF_HFT_2022231.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Phone>(phone => phone
-            .HasOne(phone => phone.Company)
+            .HasOne<Company>(phone => phone.Company)
             .WithMany(company => company.Phones)
             .HasForeignKey(phone => phone.CompanyID)
             .OnDelete(DeleteBehavior.Cascade));
 
             modelBuilder.Entity<Phone>(phone => phone
-            .HasOne(phone => phone.SmartPhoneOS)
+            .HasOne<SmartPhoneOS>(phone => phone.SmartPhoneOS)
             .WithMany(os => os.Phones)
             .HasForeignKey(phone => phone.SmartPhoneOSID)
             .OnDelete(DeleteBehavior.Cascade));
 
-            modelBuilder.Entity<Company>().HasData(new Company[]
+            modelBuilder.Entity<Company>().HasData(new Company[] 
             {
                 new Company() {CompanyID = 1, Name = "Google LLC", CEO = "Sundar Pichai", NetWorth = 1135, Headquarters="Mountain View, California, U.S.", NumberOfEmployees=139995, Founded= new DateTime(1998,9,24)},
                 new Company() {CompanyID = 2, Name = "Microsoft Corporation", CEO = "Satya Nadella", NetWorth = 2135, Headquarters="Redmond, Washington, U.S.", NumberOfEmployees=221000, Founded= new DateTime(1975,4,4)},
