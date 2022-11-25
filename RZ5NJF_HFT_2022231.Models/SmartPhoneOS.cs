@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Models
 {
-    public class OperatingSystem
+    public class SmartPhoneOS
     {
-        public OperatingSystem()
+        public SmartPhoneOS()
         {
         }
 
         #region DataFields
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OpaeratingSystemID { get; set; }
+        public int SmartPhoneOSID { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
@@ -34,6 +34,8 @@ namespace RZ5NJF_HFT_2022231.Models
         public string PackageManager { get; set; }
 
         public bool IsSupported { get; set; }
+
+        public virtual ICollection<Phone> Phones { get; set; }
         #endregion
     }
 }

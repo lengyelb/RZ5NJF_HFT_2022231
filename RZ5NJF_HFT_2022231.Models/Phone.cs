@@ -20,16 +20,13 @@ namespace RZ5NJF_HFT_2022231.Models
         [StringLength(240)]
         public string Series { get; set; }
 
-        [StringLength(240)]
-        public string IPProtection { get; set; }
-
         public DateTime ReleaseDate { get; set; }
 
         [StringLength(240)]
         public string DataInput { get; set; }
 
         [Range(0, 1000)]
-        public int ChargingSpeed { get; set; }
+        public int BatterySize { get; set; }
 
         public bool WirelessCharging { get; set; }
 
