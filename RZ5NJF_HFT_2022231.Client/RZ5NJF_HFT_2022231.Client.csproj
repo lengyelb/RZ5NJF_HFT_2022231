@@ -10,4 +10,10 @@
     <ProjectReference Include="..\RZ5NJF_HFT_2022231.Repository\RZ5NJF_HFT_2022231.Repository.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="ConsoleMenu-simple" Version="2.4.2" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
+	</ItemGroup>
+
 </Project>
