@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RZ5NJF_HFT_2022231.Logic;
+using RZ5NJF_HFT_2022231.Models;
+using RZ5NJF_HFT_2022231.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +30,15 @@ namespace RZ5NJF_HFT_2022231.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ICompanyLogic, CompanyLogic>();
+            services.AddTransient<IPhoneLogic, PhoneLogic>();
+            services.AddTransient<ISmartPhoneOSLogic, SmartPhoneOSLogic>();
+
+            services.AddTransient<IRepository<Company>, CompanyRepository>();
+            services.AddTransient<IRepository<Phone>, PhoneRepository>();
+            services.AddTransient<IRepository<SmartPhoneOS>, SmartPhoneOSRepository>();
+
+            services.AddTransient<SmartPhonesDbContext>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -42,6 +56,15 @@ namespace RZ5NJF_HFT_2022231.Endpoint
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RZ5NJF_HFT_2022231.Endpoint v1"));
             }
+
+            app.UseExceptionHandler(c => c.Run(async context =>
+            {
+                var exception = context.Features
+                .Get<IExceptionHandlerPathFeature>()
+                .Error;
+                var response = new { Message = exception.Message };
+                await context.Response.WriteAsJsonAsync(response);
+            }));
 
             app.UseRouting();
 

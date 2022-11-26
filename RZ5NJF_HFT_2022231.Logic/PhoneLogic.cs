@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Logic
 {
-    internal class PhoneLogic : IPhoneLogic
+    public class PhoneLogic : IPhoneLogic
     {
         public void Create(Phone phone_to_create)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Repository
 {
-    internal class CompanyRepository : GenericRepository<Company>, IRepository<Company>
+    public class CompanyRepository : GenericRepository<Company>, IRepository<Company>
     {
         public CompanyRepository(SmartPhonesDbContext ctx) : base(ctx)
         {

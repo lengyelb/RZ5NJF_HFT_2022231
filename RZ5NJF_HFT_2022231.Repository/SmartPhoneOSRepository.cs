@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Repository
 {
-    internal class SmartPhoneOSRepository : GenericRepository<SmartPhoneOS>, IRepository<SmartPhoneOS>
+    public class SmartPhoneOSRepository : GenericRepository<SmartPhoneOS>, IRepository<SmartPhoneOS>
     {
         public SmartPhoneOSRepository(SmartPhonesDbContext ctx) : base(ctx)
         {

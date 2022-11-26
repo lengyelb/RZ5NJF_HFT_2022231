@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Logic
 {
-    internal class SmartPhoneOSLogic : ISmartPhoneOSLogic
+    public class SmartPhoneOSLogic : ISmartPhoneOSLogic
     {
         public void Create(SmartPhoneOS os_to_create)
         {

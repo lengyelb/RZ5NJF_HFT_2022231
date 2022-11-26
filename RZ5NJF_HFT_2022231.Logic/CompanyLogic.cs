@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.Logic
 {
-    internal class CompanyLogic : ICompanyLogic
+    public class CompanyLogic : ICompanyLogic
     {
         public void Create(Company company_to_create)
         {

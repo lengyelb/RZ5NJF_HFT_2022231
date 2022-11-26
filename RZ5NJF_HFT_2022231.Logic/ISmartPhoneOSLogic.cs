@@ -16,4 +16,3 @@ namespace RZ5NJF_HFT_2022231.Logic
         void Update(SmartPhoneOS os_to_update);
     }
 }
-}
