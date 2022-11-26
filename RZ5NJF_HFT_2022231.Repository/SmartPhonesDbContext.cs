@@ -8,7 +8,7 @@ namespace RZ5NJF_HFT_2022231.Repository
 {
     public class SmartPhonesDbContext : DbContext
     {
-        protected SmartPhonesDbContext()
+        public SmartPhonesDbContext()
         {
             this.Database.EnsureCreated();
         }
@@ -19,6 +19,8 @@ namespace RZ5NJF_HFT_2022231.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //string conn_str = "";
+            //optionsBuilder.UseLazyLoadingProxies().UseSqlServer(conn_str);
             optionsBuilder.UseLazyLoadingProxies().UseInMemoryDatabase("smartphones");
         }
 
