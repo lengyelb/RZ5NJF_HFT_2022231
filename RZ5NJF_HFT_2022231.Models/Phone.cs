@@ -30,7 +30,6 @@ namespace RZ5NJF_HFT_2022231.Models
 
         public bool WirelessCharging { get; set; }
 
-
         [ForeignKey(nameof(SmartPhoneOS))]
         public int SmartPhoneOSID { get; set; }
 

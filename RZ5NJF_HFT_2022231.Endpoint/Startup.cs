@@ -30,15 +30,15 @@ namespace RZ5NJF_HFT_2022231.Endpoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICompanyLogic, CompanyLogic>();
-            services.AddTransient<IPhoneLogic, PhoneLogic>();
-            services.AddTransient<ISmartPhoneOSLogic, SmartPhoneOSLogic>();
+            services.AddTransient<SmartPhonesDbContext>();
 
             services.AddTransient<IRepository<Company>, CompanyRepository>();
             services.AddTransient<IRepository<Phone>, PhoneRepository>();
             services.AddTransient<IRepository<SmartPhoneOS>, SmartPhoneOSRepository>();
 
-            services.AddTransient<SmartPhonesDbContext>();
+            services.AddTransient<ICompanyLogic, CompanyLogic>();
+            services.AddTransient<IPhoneLogic, PhoneLogic>();
+            services.AddTransient<ISmartPhoneOSLogic, SmartPhoneOSLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
