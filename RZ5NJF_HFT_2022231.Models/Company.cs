@@ -45,7 +45,7 @@ namespace RZ5NJF_HFT_2022231.Models
         #region Overrides
         public override string ToString()
         {
-            return $"{CompanyID} - {Name}: The company probides jobs for {NumberOfEmployees} people, and has a net worth of: {NetWorth}";
+            return $"{CompanyID} - {Name}: The company provides jobs for {NumberOfEmployees} people, and has a net worth of: {NetWorth}";
         }
         #endregion
     }

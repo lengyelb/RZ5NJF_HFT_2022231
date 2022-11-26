@@ -29,6 +29,14 @@ namespace RZ5NJF_HFT_2022231.Logic
 
         public void Delete(int company_to_delete_id)
         {
+            try
+            {
+                Read(company_to_delete_id);
+            }
+            catch (ArgumentException ex)
+            { 
+                throw new ArgumentException("Company to delte does not exist", ex);
+            }
             this.repo.Delete(company_to_delete_id);
         }
 

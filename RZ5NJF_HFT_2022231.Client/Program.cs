@@ -1,8 +1,12 @@
 ﻿using Castle.DynamicProxy.Generators;
 using ConsoleTools;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using RZ5NJF_HFT_2022231.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
 
 namespace RZ5NJF_HFT_2022231.Client
 {
@@ -15,7 +19,7 @@ namespace RZ5NJF_HFT_2022231.Client
 
         static bool IsNumber(string str)
         {
-            if (str != null)
+            if (str != "")
             {
                 try
                 {
@@ -33,7 +37,7 @@ namespace RZ5NJF_HFT_2022231.Client
 
         static bool IsBool(string str)
         {
-            if (str != null)
+            if (str != "")
             {
                 try
                 {
@@ -51,7 +55,7 @@ namespace RZ5NJF_HFT_2022231.Client
 
         static bool IsDate(string str)
         {
-            if (str != null)
+            if (str != "")
             {
                 try
                 {
@@ -67,16 +71,20 @@ namespace RZ5NJF_HFT_2022231.Client
             return false;
         }
 
-        static string AskForData(string message, string error_message, Predicate<string> check_correction)
+        static string AskForData(string message, string error_message, Predicate<string> check_correction, bool allow_empty = false)
         {
             Console.WriteLine(message);
             string answer = Console.ReadLine();
-            while (!check_correction(answer))
+            if (!(answer == "" && allow_empty))
             {
-                Console.WriteLine(error_message);
-                answer = Console.ReadLine();
+                while (!check_correction(answer))
+                {
+                    Console.WriteLine(error_message);
+                    answer = Console.ReadLine();
+                }
+                return answer;
             }
-            return answer;
+            return null;
         }
         #endregion
 
@@ -86,78 +94,302 @@ namespace RZ5NJF_HFT_2022231.Client
             switch (record_to_create)
             {
                 case data_types_enum.Company:
-                    string new_company_name = AskForData("Please enter the name of the company:", "You need to enter something, please try again:", (t => t != ""));
-                    string new_company_CEO = AskForData("Please enter the name of the CEO:", "You need to enter something, please try again:", (t => t != ""));
-                    int new_company_net_worth = int.Parse(AskForData("Please enter the net worth of the company (in whole billion dollars):", "You need to enter a number, please try again:", (t => IsNumber(t))));
-                    string new_company_hq = AskForData("Please enter the headquarter location of the company:", "You need to enter something, please try again:", (t => t != ""));
-                    int new_company_employye_num = int.Parse(AskForData("Please enter the number of employyes working at the company:", "You need to enter a number, please try again:", (t => IsNumber(t))));
-                    DateTime new_compamy_founded = DateTime.Parse(AskForData("Please enter the founding date of the company (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))));
+                    #region Case Company
                     try
                     {
+                        rest.Post(new Company() 
+                        {
+                            Name = AskForData("Please enter the name of the company:", "You need to enter something, please try again:", (t => t != "")),
+                            CEO = AskForData("Please enter the name of the CEO:", "You need to enter something, please try again:", (t => t != "")),
+                            NetWorth = int.Parse(AskForData("Please enter the net worth of the company (in whole billion dollars):", "You need to enter a number, please try again:", (t => IsNumber(t)))),
+                            Headquarters = AskForData("Please enter the headquarter location of the company:", "You need to enter something, please try again:", (t => t != "")),
+                            NumberOfEmployees = int.Parse(AskForData("Please enter the number of employyes working at the company:", "You need to enter a number, please try again:", (t => IsNumber(t)))),
+                            Founded = DateTime.Parse(AskForData("Please enter the founding date of the company (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))))
+                        }, "Company");
                         Console.WriteLine("Company sucesfully created!");
-                        Console.ReadLine();
                     }
                     catch (Exception)
                     {
                         Console.WriteLine("And error occured, company could not be created :/");
-                        Console.ReadLine();
                     }
                     break;
+                    #endregion
                 case data_types_enum.Phone:
-                    string new_phone_name = AskForData("Please enter the name of the phone:", "You need to enter something, please try again:", (t => t != ""));
-                    string new_phone_series = AskForData("Please enter the series of the phone:", "You need to enter something, please try again:", (t => t != ""));
-                    DateTime new_phone_release_date = DateTime.Parse(AskForData("Please enter the release date of the phone (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))));
-                    string new_phone_data_input = AskForData("Please enter the connection method used for data (i.e. UDB-C):", "You need to enter something, please try again:", (t => t != ""));
-                    int new_phone_battery_size = int.Parse(AskForData("Please enter the battery size of the phone (in mAh):", "You need to enter a number, please try again:", (t => IsNumber(t))));
-                    bool new_phone_wireless_charging = bool.Parse(AskForData("Please enter if the phone has wireless charging (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t))));
+                    #region Case Phone
                     try
                     {
+                        rest.Post(new Phone()
+                        {
+                            Name = AskForData("Please enter the name of the phone:", "You need to enter something, please try again:", (t => t != "")),
+                            Series = AskForData("Please enter the series of the phone:", "You need to enter something, please try again:", (t => t != "")),
+                            ReleaseDate = DateTime.Parse(AskForData("Please enter the release date of the phone (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t)))),
+                            DataInput = AskForData("Please enter the connection method used for data (i.e. UDB-C):", "You need to enter something, please try again:", (t => t != "")),
+                            BatterySize = int.Parse(AskForData("Please enter the battery size of the phone (in mAh):", "You need to enter a number, please try again:", (t => IsNumber(t)))),
+                            WirelessCharging = bool.Parse(AskForData("Please enter if the phone has wireless charging (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t)))),
+                        }, "Phone");
                         Console.WriteLine("Phone sucesfully created!");
-                        Console.ReadLine();
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("And error occured, company could not be created :/");
-                        Console.ReadLine();
+                        Console.WriteLine("And error occured, phone could not be created :/");
                     }
                     break;
+                    #endregion
                 case data_types_enum.SmartPhoneOS:
-                    string new_os_name = AskForData("Please enter the name of the os:", "You need to enter something, please try again:", (t => t != ""));
-                    string new_os_kernel = AskForData("Please enter the kernel of the os:", "You need to enter something, please try again:", (t => t != ""));
-                    string new_os_family = AskForData("Please enter the family of the os:", "You need to enter something, please try again:", (t => t != ""));
-                    DateTime new_os_release_date = DateTime.Parse(AskForData("Please enter the release date of the os (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))));
-                    string new_os_package_manager = AskForData("Please enter the package manager of the os (i.e. Google Play Store):", "You need to enter something, please try again:", (t => t != ""));
-                    bool new_os_is_supported = bool.Parse(AskForData("Please enter if the os is still supported (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t))));
+                    #region Case SmartPhoneOS
                     try
                     {
+                        rest.Post(new SmartPhoneOS()
+                        {
+                            Name = AskForData("Please enter the name of the os:", "You need to enter something, please try again:", (t => t != "")),
+                            Kernel = AskForData("Please enter the kernel of the os:", "You need to enter something, please try again:", (t => t != "")),
+                            OSFamily = AskForData("Please enter the family of the os:", "You need to enter something, please try again:", (t => t != "")),
+                            ReleaseDate = DateTime.Parse(AskForData("Please enter the release date of the os (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t)))),
+                            PackageManager = AskForData("Please enter the package manager of the os (i.e. Google Play Store):", "You need to enter something, please try again:", (t => t != "")),
+                            IsSupported = bool.Parse(AskForData("Please enter if the os is still supported (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t))))
+                        }, "SmartPhoneO");
                         Console.WriteLine("Operating system sucesfully created!");
-                        Console.ReadLine();
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("And error occured, company could not be created :/");
-                        Console.ReadLine();
+                        Console.WriteLine("And error occured, operating system could not be created :/");
                     }
                     break;
+                    #endregion
                 default:
+                    #region Case Default
                     Console.WriteLine("If you can see this message something went horribly wrong!");
+                    Console.ReadLine();
                     break;
+                    #endregion
             }
+            Console.ReadLine();
         }
 
         static void Read(data_types_enum record_to_read)
         {
-            Console.WriteLine(record_to_read);
+            switch (record_to_read)
+            {
+                case data_types_enum.Company:
+                    #region Case Company
+                    List<Company> company_list = rest.Get<Company>("Company");
+                    foreach (Company company in company_list)
+                    {
+                        Console.WriteLine(company);
+                    }
+                    break;
+                    #endregion
+                case data_types_enum.Phone:
+                    #region Case Phone
+                    List<Phone> phone_list = rest.Get<Phone>("Phone");
+                    foreach (Phone phone in phone_list)
+                    {
+                        Console.WriteLine(phone);
+                    }
+                    break;
+                    #endregion
+                case data_types_enum.SmartPhoneOS:
+                    #region Case SmartPhoneOS
+                    List<SmartPhoneOS> os_list = rest.Get<SmartPhoneOS>("SmartPhoneOS");
+                    foreach (SmartPhoneOS os in os_list)
+                    {
+                        Console.WriteLine(os);
+                    }
+                    break;
+                    #endregion
+                default:
+                    #region Case Default
+                    Console.WriteLine("If you can see this message something went horribly wrong!");
+                    break;
+                    #endregion
+            }
+            Console.ReadLine();
         }
 
         static void Update(data_types_enum record_to_update)
         {
-            Console.WriteLine(record_to_update);
+            switch (record_to_update)
+            {
+                case data_types_enum.Company:
+                    #region Case Company
+                    int company_to_update_id = int.Parse(AskForData("Please enter the id of the company you wish to update:", "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    Company company_to_update = rest.Get<Company>(company_to_update_id, "Company");
+
+                    Console.WriteLine();
+                    Console.WriteLine("Enter no data if you want to keep the current one");
+                    company_to_update.Name = AskForData(
+                        $"Please enter the new name of the company [current: {company_to_update.Name}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? company_to_update.Name;
+                    company_to_update.CEO = AskForData(
+                        $"Please enter the new name of the CEO [current: {company_to_update.CEO}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? company_to_update.CEO;
+                    company_to_update.NetWorth = int.Parse(AskForData(
+                        $"Please enter the updated net worth of the company (in whole billion dollars) [current: {company_to_update.NetWorth}]:",
+                        "You need to enter a number, please try again:",
+                        (t => IsNumber(t)), true) ?? company_to_update.NetWorth.ToString());
+                    company_to_update.Headquarters = AskForData(
+                        $"Please enter the new location of the company [current: {company_to_update.Headquarters}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? company_to_update.Headquarters;
+                    company_to_update.NumberOfEmployees = int.Parse(AskForData(
+                        $"Please enter the updated number of employyes working at the company [current: {company_to_update.NumberOfEmployees}]:",
+                        "You need to enter a number, please try again:",
+                        (t => IsNumber(t)), true) ?? company_to_update.NumberOfEmployees.ToString());
+                    company_to_update.Founded = DateTime.Parse(AskForData(
+                        $"Please enter the updated founding date of the company (yyyy, mm, dd) [current: {company_to_update.Founded}]:",
+                        "You need to enter a correct date format, please try again:",
+                        (t => IsDate(t)), true) ?? company_to_update.Founded.ToString());
+
+                    try
+                    {
+                        rest.Put(company_to_update, "Company");
+                        Console.WriteLine("Company sucesfully updated!");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("And error occured, company could not be updated :/");
+                    }
+                    break;
+                #endregion
+                case data_types_enum.Phone:
+                    #region Case Phone
+                    int phone_to_update_id = int.Parse(AskForData("Please enter the id of the phone you wish to update:", "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    Phone phone_to_update = rest.Get<Phone>(phone_to_update_id, "Phone");
+
+                    Console.WriteLine();
+                    Console.WriteLine("Enter no data if you want to keep the current one");
+                    phone_to_update.Name = AskForData(
+                        $"Please enter the new name of the phone [current: {phone_to_update.Name}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? phone_to_update.Name;
+                    phone_to_update.Series = AskForData(
+                        $"Please enter the new series of the phone [current: {phone_to_update.Series}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? phone_to_update.Series;
+                    phone_to_update.ReleaseDate = DateTime.Parse(AskForData(
+                        $"Please enter the updated release date of the phone (yyyy, mm, dd) [current: {phone_to_update.ReleaseDate}]:",
+                        "You need to enter a correct date format, please try again:",
+                        (t => IsDate(t)), true) ?? phone_to_update.ReleaseDate.ToString());
+                    phone_to_update.DataInput = AskForData(
+                        $"Please enter the new data input type of the phone [current: {phone_to_update.DataInput}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? phone_to_update.DataInput;
+                    phone_to_update.BatterySize = int.Parse(AskForData(
+                        $"Please enter the updated size of the battery [current: {phone_to_update.BatterySize}]:",
+                        "You need to enter a number, please try again:",
+                        (t => IsNumber(t)), true) ?? phone_to_update.BatterySize.ToString());
+                    phone_to_update.WirelessCharging = bool.Parse(AskForData(
+                        $"Please enter if the phone has wireless charging (0=no, 1=yes) [current: {phone_to_update.WirelessCharging}]:",
+                        "You need to enter a number, please try again:",
+                        (t => IsNumber(t)), true) ?? phone_to_update.WirelessCharging.ToString());
+
+                    try
+                    {
+                        rest.Put(phone_to_update, "Company");
+                        Console.WriteLine("Phone sucesfully updated!");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("And error occured, phone could not be updated :/");
+                    }
+                    break;
+                #endregion
+                case data_types_enum.SmartPhoneOS:
+                    #region Case SmartPhoneOS
+                    int os_to_update_id = int.Parse(AskForData("Please enter the id of the operating system you wish to update:", "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    SmartPhoneOS os_to_update = rest.Get<SmartPhoneOS>(os_to_update_id, "SmartPhoneOS");
+
+                    Console.WriteLine();
+                    Console.WriteLine("Enter no data if you want to keep the current one");
+                    os_to_update.Name = AskForData(
+                        $"Please enter the new name of the operating system [current: {os_to_update.Name}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? os_to_update.Name;
+                    os_to_update.Kernel = AskForData(
+                        $"Please enter the new kernel of the operating system [current: {os_to_update.Kernel}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? os_to_update.Kernel;
+                    os_to_update.OSFamily = AskForData(
+                        $"Please enter the new family of the oparting system [current: {os_to_update.OSFamily}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? os_to_update.OSFamily;
+                    os_to_update.ReleaseDate = DateTime.Parse(AskForData(
+                        $"Please enter the updated release date of the operating system (yyyy, mm, dd) [current: {os_to_update.ReleaseDate}]:",
+                        "You need to enter a correct date format, please try again:",
+                        (t => IsDate(t)), true) ?? os_to_update.ReleaseDate.ToString());
+                    os_to_update.PackageManager = AskForData(
+                        $"Please enter the new package manager of the oparting system [current: {os_to_update.PackageManager}]:",
+                        "You need to enter something, please try again:",
+                        (t => t != ""), true) ?? os_to_update.PackageManager;
+                    os_to_update.IsSupported = bool.Parse(AskForData(
+                        $"Please enter if the os is still supported (0=no, 1=yes) [current: {os_to_update.IsSupported}]:",
+                        "You need to enter a number, please try again:",
+                        (t => IsNumber(t)), true) ?? os_to_update.IsSupported.ToString());
+
+                    try
+                    {
+                        rest.Put(os_to_update, "SmartPhoneOS");
+                        Console.WriteLine("Operating system sucesfully updated!");
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("And error occured, operating system could not be updated :/");
+                    }
+                    break;
+                    #endregion
+                default:
+                    #region Case Default
+                    Console.WriteLine("If you can see this message something went horribly wrong!");
+                    break;
+                    #endregion
+            }
+            Console.ReadLine();
         }
 
         static void Delete(data_types_enum record_to_delete)
         {
-            Console.WriteLine(record_to_delete);
+            switch (record_to_delete)
+            {
+                case data_types_enum.Company:
+                    #region
+                    int company_to_delete_id = int.Parse(AskForData("Plase give the id of the company you wish to delete:",
+                        "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    rest.Delete(company_to_delete_id, "Company");
+                    Console.WriteLine("Company was succesfully delteted!");
+                    break;
+                    #endregion
+                case data_types_enum.Phone:
+                    #region
+                    int phone_to_delete_id = int.Parse(AskForData("Plase give the id of the phone you wish to delete:",
+                        "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    rest.Delete(phone_to_delete_id, "Phone");
+                    Console.WriteLine("Phone was succesfully delteted!");
+                    break;
+                    #endregion
+                case data_types_enum.SmartPhoneOS:
+                    #region
+                    int os_to_delete_id = int.Parse(AskForData("Plase give the id of the oerating system you wish to delete:",
+                        "You need to enter a number, please try again:", (t => IsNumber(t))));
+
+                    rest.Delete(os_to_delete_id, "SmartPhoneOS");
+                    Console.WriteLine("Operating system was succesfully delteted!");
+                    break;
+                    #endregion
+                default:
+                    #region Case Default
+                    Console.WriteLine("If you can see this message something went horribly wrong!");
+                    Console.ReadLine();
+                    break;
+                    #endregion
+            }
+            Console.ReadLine();
         }
         #endregion
 
