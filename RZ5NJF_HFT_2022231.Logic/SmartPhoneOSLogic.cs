@@ -1,4 +1,5 @@
 ﻿using RZ5NJF_HFT_2022231.Models;
+using RZ5NJF_HFT_2022231.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,49 @@ namespace RZ5NJF_HFT_2022231.Logic
 {
     public class SmartPhoneOSLogic : ISmartPhoneOSLogic
     {
+        IRepository<SmartPhoneOS> repo;
+
+        public SmartPhoneOSLogic(IRepository<SmartPhoneOS> repo)
+        {
+            this.repo = repo;
+        }
+
+        #region CRUD Methods
         public void Create(SmartPhoneOS os_to_create)
         {
-            throw new NotImplementedException();
+            if (os_to_create.Name.Length < 2)
+            {
+                throw new ArgumentException("Opaerating system name is too short");
+            }
+            this.repo.Create(os_to_create);
         }
 
         public void Delete(int os_to_delete_id)
         {
-            throw new NotImplementedException();
+            this.repo.Delete(os_to_delete_id);
         }
 
         public SmartPhoneOS Read(int os_to_read_id)
         {
-            throw new NotImplementedException();
+            var Operating_system = this.repo.Read(os_to_read_id);
+
+            if (Operating_system == null)
+            {
+                throw new ArgumentException("Operating system does not exist");
+            }
+
+            return Operating_system;
         }
 
         public IQueryable<SmartPhoneOS> ReadAll()
         {
-            throw new NotImplementedException();
+            return this.repo.ReadAll();
         }
 
         public void Update(SmartPhoneOS os_to_update)
         {
-            throw new NotImplementedException();
+            this.repo.Update(os_to_update);
         }
+        #endregion
     }
 }

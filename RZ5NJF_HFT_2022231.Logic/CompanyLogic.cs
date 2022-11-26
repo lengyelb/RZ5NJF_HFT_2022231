@@ -1,4 +1,5 @@
 ﻿using RZ5NJF_HFT_2022231.Models;
+using RZ5NJF_HFT_2022231.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,49 @@ namespace RZ5NJF_HFT_2022231.Logic
 {
     public class CompanyLogic : ICompanyLogic
     {
+        IRepository<Company> repo;
+
+        public CompanyLogic(IRepository<Company> repo)
+        {
+            this.repo = repo;
+        }
+
+        #region CRUD Methods
         public void Create(Company company_to_create)
         {
-            throw new NotImplementedException();
+            if (company_to_create.Name.Length < 2)
+            {
+                throw new ArgumentException("Company name is too short");
+            }
+            this.repo.Create(company_to_create);
         }
 
         public void Delete(int company_to_delete_id)
         {
-            throw new NotImplementedException();
+            this.repo.Delete(company_to_delete_id);
         }
 
         public Company Read(int company_to_read_id)
         {
-            throw new NotImplementedException();
+            var company = this.repo.Read(company_to_read_id);
+
+            if (company == null)
+            {
+                throw new ArgumentException("Company does not exist");
+            }
+
+            return company;
         }
 
         public IQueryable<Company> ReadAll()
         {
-            throw new NotImplementedException();
+            return this.repo.ReadAll();
         }
 
         public void Update(Company company_to_update)
         {
-            throw new NotImplementedException();
+            this.repo.Update(company_to_update);
         }
+        #endregion
     }
 }

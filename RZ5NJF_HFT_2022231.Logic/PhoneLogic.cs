@@ -1,4 +1,5 @@
 ﻿using RZ5NJF_HFT_2022231.Models;
+using RZ5NJF_HFT_2022231.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,29 +10,49 @@ namespace RZ5NJF_HFT_2022231.Logic
 {
     public class PhoneLogic : IPhoneLogic
     {
+        IRepository<Phone> repo;
+
+        public PhoneLogic(IRepository<Phone> repo)
+        {
+            this.repo = repo;
+        }
+
+        #region CRUD Methods
         public void Create(Phone phone_to_create)
         {
-            throw new NotImplementedException();
+            if (phone_to_create.Name.Length < 2)
+            {
+                throw new ArgumentException("Phone name is too short");
+            }
+            this.repo.Create(phone_to_create);
         }
 
         public void Delete(int phone_to_delete_id)
         {
-            throw new NotImplementedException();
+            this.repo.Delete(phone_to_delete_id);
         }
 
         public Phone Read(int phone_to_read_id)
         {
-            throw new NotImplementedException();
+            var phone = this.repo.Read(phone_to_read_id);
+
+            if (phone == null)
+            {
+                throw new ArgumentException("Phone does not exist");
+            }
+
+            return phone;
         }
 
         public IQueryable<Phone> ReadAll()
         {
-            throw new NotImplementedException();
+            return this.repo.ReadAll();
         }
 
         public void Update(Phone phone_to_update)
         {
-            throw new NotImplementedException();
+            this.repo.Update(phone_to_update);
         }
+        #endregion
     }
 }

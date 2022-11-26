@@ -45,7 +45,7 @@ namespace RZ5NJF_HFT_2022231.Repository
                 new Company() {CompanyID = 3, Name = "Apple Inc.", CEO = "Tim Cook", NetWorth = 2389, Headquarters="Cupertino, California, U.S.", NumberOfEmployees=164000 , Founded= new DateTime(1976,4,1)},
                 new Company() {CompanyID = 4, Name = "Huawei Technologies Co., Ltd.", CEO = "Zsen Cseng-fej", NetWorth = 108, Headquarters="Shenzhen, China", NumberOfEmployees=19500, Founded= new DateTime(1987,9,15)},
                 new Company() {CompanyID = 5, Name = "Samsung Eelectronics Co., Ltd", CEO = "Lee Jae-yong", NetWorth = 500, Headquarters="Seocho District, Seoul, South Korea", NumberOfEmployees=266673, Founded= new DateTime(1938,3,1)},
-                new Company() {CompanyID = 6, Name = "Xiaomi Corporation", CEO = "Lej Csün", NetWorth = 32, Headquarters="\tHaidian District, Beijing, China", NumberOfEmployees=33427, Founded= new DateTime(2010,4,10)}
+                new Company() {CompanyID = 6, Name = "Xiaomi Corporation", CEO = "Lej Csün", NetWorth = 32, Headquarters="Haidian District, Beijing, China", NumberOfEmployees=33427, Founded= new DateTime(2010,4,10)}
             });
 
             modelBuilder.Entity<Phone>().HasData(new Phone[]

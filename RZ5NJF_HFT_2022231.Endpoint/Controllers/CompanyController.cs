@@ -7,11 +7,11 @@ namespace RZ5NJF_HFT_2022231.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CopmpanyController
+    public class CompanyController
     {
         ICompanyLogic companyLogic;
 
-        public CopmpanyController(ICompanyLogic companyLogic)
+        public CompanyController(ICompanyLogic companyLogic)
         {
             this.companyLogic = companyLogic;
         }

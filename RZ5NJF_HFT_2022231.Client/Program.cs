@@ -1,7 +1,6 @@
 ﻿using Castle.DynamicProxy.Generators;
 using ConsoleTools;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using RZ5NJF_HFT_2022231.Repository;
 using System;
 using System.Linq;
 
@@ -9,6 +8,8 @@ namespace RZ5NJF_HFT_2022231.Client
 {
     class Program
     {
+        static RestService rest;
+
         #region Helper methods
         enum data_types_enum { Company, Phone, SmartPhoneOS};
 
@@ -162,7 +163,7 @@ namespace RZ5NJF_HFT_2022231.Client
 
         static void Main(string[] args)
         {
-            //http://localhost:22184/
+            rest = new RestService("http://localhost:22184/", "Company");
 
             #region Menu
             var phones_menu = new ConsoleMenu(args, level: 1)
