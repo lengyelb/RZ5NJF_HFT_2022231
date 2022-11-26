@@ -9,9 +9,9 @@ namespace RZ5NJF_HFT_2022231.Client
 {
     class Program
     {
+        #region Helper methods
         enum data_types_enum { Company, Phone, SmartPhoneOS};
 
-        #region Helper methods
         static bool IsNumber(string str)
         {
             if (str != null)
@@ -139,6 +139,7 @@ namespace RZ5NJF_HFT_2022231.Client
                     }
                     break;
                 default:
+                    Console.WriteLine("If you can see this message something went horribly wrong!");
                     break;
             }
         }
@@ -161,16 +162,6 @@ namespace RZ5NJF_HFT_2022231.Client
 
         static void Main(string[] args)
         {
-            #region temp
-            //SmartPhonesDbContext ctx = new SmartPhonesDbContext();
-
-            //var phones = ctx.Phones.ToArray();
-            //foreach ( var phone in phones )
-            //{
-            //    Console.WriteLine(phone.Name);
-            //}
-            #endregion
-
             //http://localhost:22184/
 
             #region Menu
