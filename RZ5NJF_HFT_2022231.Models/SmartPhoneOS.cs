@@ -40,5 +40,12 @@ namespace RZ5NJF_HFT_2022231.Models
         [JsonIgnore]
         public virtual ICollection<Phone> Phones { get; set; }
         #endregion
+
+        #region Overrides
+        public override string ToString()
+        {
+            return $"{SmartPhoneOSID} - {Name}: This operating system was created in {ReleaseDate.Year}, it was built on {Kernel} and is {(IsSupported? "still": "no longer")} supported";
+        }
+        #endregion
     }
 }

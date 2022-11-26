@@ -41,5 +41,12 @@ namespace RZ5NJF_HFT_2022231.Models
         [JsonIgnore]
         public virtual ICollection<Phone> Phones { get; set; }
         #endregion
+
+        #region Overrides
+        public override string ToString()
+        {
+            return $"{CompanyID} - {Name}: The company probides jobs for {NumberOfEmployees} people, and has a net worth of: {NetWorth}";
+        }
+        #endregion
     }
 }

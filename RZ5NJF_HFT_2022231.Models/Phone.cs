@@ -42,5 +42,12 @@ namespace RZ5NJF_HFT_2022231.Models
         [NotMapped]
         public virtual Company Company { get; set; }
         #endregion
+
+        #region Overrides
+        public override string ToString()
+        {
+            return $"{PhoneID} - {Name}: This phone was created by: {Company.Name}, it runs on {SmartPhoneOS.Name} and was released in: {ReleaseDate.Year}";
+        }
+        #endregion
     }
 }
