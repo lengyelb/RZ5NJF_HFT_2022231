@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace RZ5NJF_HFT_2022231.Models
 {
@@ -35,6 +36,8 @@ namespace RZ5NJF_HFT_2022231.Models
 
         public bool IsSupported { get; set; }
 
+        [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Phone> Phones { get; set; }
         #endregion
     }
