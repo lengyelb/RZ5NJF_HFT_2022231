@@ -20,7 +20,7 @@ namespace RZ5NJF_HFT_2022231.Logic
         #region CRUD Methods
         public void Create(SmartPhoneOS os_to_create)
         {
-            if (os_to_create.Name.Length < 2)
+            if (os_to_create.Name.Length < 2 || os_to_create.ReleaseDate < new DateTime(1990, 1, 1))
             {
                 throw new ArgumentException("Opaerating system name is too short");
             }

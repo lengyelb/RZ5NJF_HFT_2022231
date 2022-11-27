@@ -18,7 +18,6 @@ namespace RZ5NJF_HFT_2022231.Logic
         #endregion
 
         #region non-CRUD Methods
-        Company MostpplAndroidMaker();
         SmartPhoneOS SmallestCompanyLatestOS();
         #endregion
     }

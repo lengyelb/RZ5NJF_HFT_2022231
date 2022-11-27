@@ -21,6 +21,7 @@ namespace RZ5NJF_HFT_2022231.Logic
         IEnumerable<Phone> SupportedApple();
         Phone OldestWirelessSamsung();
         IEnumerable<SmartPhoneOS> LargeBatteryOS();
+        Company MostpplAndroidMaker();
         #endregion
     }
 }

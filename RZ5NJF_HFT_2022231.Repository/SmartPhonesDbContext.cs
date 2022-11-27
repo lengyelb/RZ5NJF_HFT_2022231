@@ -19,8 +19,6 @@ namespace RZ5NJF_HFT_2022231.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //string conn_str = "";
-            //optionsBuilder.UseLazyLoadingProxies().UseSqlServer(conn_str);
             optionsBuilder.UseLazyLoadingProxies().UseInMemoryDatabase("smartphones");
         }
 

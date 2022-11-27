@@ -20,7 +20,7 @@ namespace RZ5NJF_HFT_2022231.Logic
         #region CRUD Methods
         public void Create(Phone phone_to_create)
         {
-            if (phone_to_create.Name.Length < 2)
+            if (phone_to_create.Name.Length < 2 || phone_to_create.BatterySize < 500)
             {
                 throw new ArgumentException("Phone name is too short");
             }
@@ -64,6 +64,11 @@ namespace RZ5NJF_HFT_2022231.Logic
         public Phone OldestWirelessSamsung()
         {
             return this.repo.ReadAll().OrderBy(t => t.ReleaseDate).FirstOrDefault(t => t.WirelessCharging && t.Company.Name.ToLower().Contains("samsung"));
+        }
+
+        public Company MostpplAndroidMaker()
+        {
+            return this.repo.ReadAll().Where(t => t.SmartPhoneOS.Name.ToLower().Contains("android")).OrderByDescending(t=>t.Company.NumberOfEmployees).First().Company;
         }
 
         public IEnumerable<SmartPhoneOS> LargeBatteryOS()

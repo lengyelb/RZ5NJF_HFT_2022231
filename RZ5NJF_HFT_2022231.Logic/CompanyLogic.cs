@@ -64,11 +64,6 @@ namespace RZ5NJF_HFT_2022231.Logic
         #endregion
 
         #region non-CRUD Methods
-        public Company MostpplAndroidMaker()
-        {
-            return this.repo.ReadAll().OrderByDescending(t => t.NumberOfEmployees).FirstOrDefault(t=>t.Phones.Count(p => p.SmartPhoneOS.OSFamily.ToLower().Contains("android")) > 0);
-        }
-
         public SmartPhoneOS SmallestCompanyLatestOS()
         {
             return this.repo.ReadAll().OrderBy(t => t.NetWorth).First().Phones.OrderByDescending(t => t.SmartPhoneOS.ReleaseDate).First().SmartPhoneOS;

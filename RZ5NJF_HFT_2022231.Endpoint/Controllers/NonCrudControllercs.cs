@@ -35,7 +35,7 @@ namespace RZ5NJF_HFT_2022231.Endpoint.Controllers
         [HttpGet]
         public Company MostpplAndroidMaker()
         {
-            return this.companyLogic.MostpplAndroidMaker();
+            return this.phoneLogic.MostpplAndroidMaker();
         }
 
         [HttpGet]
