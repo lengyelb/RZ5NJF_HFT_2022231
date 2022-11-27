@@ -46,6 +46,22 @@ namespace RZ5NJF_HFT_2022231.Models
         {
             return $"{SmartPhoneOSID} - {Name}: This operating system was created in {ReleaseDate.Year}, it was built on {Kernel} and is {(IsSupported? "still": "no longer")} supported";
         }
+
+        public override bool Equals(object obj)
+        {
+            SmartPhoneOS other = obj as SmartPhoneOS;
+            return other != null && this.SmartPhoneOSID == other.SmartPhoneOSID
+                && this.Name == other.Name && this.Kernel == other.Kernel && this.OSFamily == other.OSFamily
+                && this.ReleaseDate == other.ReleaseDate && this.PackageManager == other.PackageManager
+                && this.IsSupported == other.IsSupported;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(SmartPhoneOSID.GetHashCode(), Name.GetHashCode(), Kernel.GetHashCode(),
+                OSFamily.GetHashCode(), ReleaseDate.GetHashCode(), PackageManager.GetHashCode(),
+                IsSupported.GetHashCode());
+        }
         #endregion
     }
 }

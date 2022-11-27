@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.ConstrainedExecution;
 
 namespace RZ5NJF_HFT_2022231.Models
 {
@@ -47,6 +48,22 @@ namespace RZ5NJF_HFT_2022231.Models
         public override string ToString()
         {
             return $"{PhoneID} - {Name}: This phone was created by: {Company.Name}, it runs on {SmartPhoneOS.Name} and was released in: {ReleaseDate.Year}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            Phone other = obj as Phone;
+            return other != null && this.PhoneID == other.PhoneID
+                && this.Name == other.Name && this.Series == other.Series && this.ReleaseDate == other.ReleaseDate
+                && this.DataInput == other.DataInput && this.BatterySize == other.BatterySize
+                && this.WirelessCharging == other.WirelessCharging;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(PhoneID.GetHashCode(), Name.GetHashCode(), Series.GetHashCode(),
+                ReleaseDate.GetHashCode(), DataInput.GetHashCode(), BatterySize.GetHashCode(),
+                WirelessCharging.GetHashCode());
         }
         #endregion
     }
