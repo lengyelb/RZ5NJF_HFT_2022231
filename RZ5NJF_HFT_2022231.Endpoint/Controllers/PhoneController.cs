@@ -7,7 +7,7 @@ namespace RZ5NJF_HFT_2022231.Endpoint.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class PhoneController
+    public class PhoneController : ControllerBase
     {
         IPhoneLogic phoneLogic;
 

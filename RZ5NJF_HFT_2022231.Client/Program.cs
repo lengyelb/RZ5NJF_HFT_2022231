@@ -394,7 +394,24 @@ namespace RZ5NJF_HFT_2022231.Client
         #endregion
 
         #region non-CRUD methods
+        static void SupportedApple()
+        {
+            List<Phone> supported_apple_phones = rest.Get<Phone>("NonCrud/SupportedApple");
 
+            foreach (Phone phone in supported_apple_phones)
+            {
+                Console.WriteLine(phone);
+            }
+            Console.ReadLine();
+        }
+
+        static void OldestWirelessSamsung()
+        {
+            Phone oldest_wireless_samsung = rest.GetSingle<Phone>("NonCrud/OldestWirelessSamsung");
+
+            Console.WriteLine(oldest_wireless_samsung);
+            Console.ReadLine();
+        }
         #endregion
 
         static void Main(string[] args)
@@ -408,8 +425,8 @@ namespace RZ5NJF_HFT_2022231.Client
                 .Add("Delete", () => Delete(data_types_enum.Phone))
                 .Add("Update\n", () => Update(data_types_enum.Phone))
 
-                .Add("Still supported phones made by apple", () => Console.WriteLine(" WIP "))
-                .Add("Oldest samsung phone that supports wirelesss charging\n", () => Console.WriteLine(" WIP "))
+                .Add("Still supported phones made by apple", () => SupportedApple())
+                .Add("Oldest samsung phone that supports wirelesss charging\n", () => OldestWirelessSamsung())
 
                 .Add("Exit", ConsoleMenu.Close);
 

@@ -54,5 +54,17 @@ namespace RZ5NJF_HFT_2022231.Logic
             this.repo.Update(phone_to_update);
         }
         #endregion
+
+        #region non-CRUD methods
+        public IEnumerable<Phone> SupportedApple()
+        {
+            return this.repo.ReadAll().Where(t => t.Company.Name.ToLower().Contains("apple") && t.SmartPhoneOS.IsSupported);
+        }
+
+        public Phone OldestWirelessSamsung()
+        {
+            return this.repo.ReadAll().Where(t => t.WirelessCharging && t.Company.Name.ToLower().Contains("samsung")).OrderBy(t => t.ReleaseDate).First();
+        }
+        #endregion
     }
 }
