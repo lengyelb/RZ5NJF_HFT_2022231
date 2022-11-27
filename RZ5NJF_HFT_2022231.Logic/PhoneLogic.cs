@@ -65,6 +65,11 @@ namespace RZ5NJF_HFT_2022231.Logic
         {
             return this.repo.ReadAll().OrderBy(t => t.ReleaseDate).FirstOrDefault(t => t.WirelessCharging && t.Company.Name.ToLower().Contains("samsung"));
         }
+
+        public IEnumerable<SmartPhoneOS> LargeBatteryOS()
+        {
+            return this.repo.ReadAll().Where(t => t.BatterySize >= 4000).Select(t => t.SmartPhoneOS).Distinct();
+        }
         #endregion
     }
 }

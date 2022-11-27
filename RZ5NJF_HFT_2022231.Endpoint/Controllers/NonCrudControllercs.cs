@@ -43,5 +43,17 @@ namespace RZ5NJF_HFT_2022231.Endpoint.Controllers
         {
             return this.smartPhoneOsLogic.LatestOsCompany();
         }
+
+        [HttpGet]
+        public SmartPhoneOS SmallestCompanyLatestOS()
+        {
+            return this.companyLogic.SmallestCompanyLatestOS();
+        }
+
+        [HttpGet]
+        public IEnumerable<SmartPhoneOS> LargeBatteryOS()
+        {
+            return this.phoneLogic.LargeBatteryOS();
+        }
     }
 }

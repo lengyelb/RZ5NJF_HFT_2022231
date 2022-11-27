@@ -432,6 +432,25 @@ namespace RZ5NJF_HFT_2022231.Client
 
             Console.ReadLine();
         }
+
+        static void SmallestCompanyLatestOS()
+        {
+            SmartPhoneOS smallest_company_latest_os = rest.GetSingle<SmartPhoneOS>("NonCrud/SmallestCompanyLatestOS");
+
+            Console.WriteLine(smallest_company_latest_os);
+            Console.ReadLine();
+        }
+
+        static void LargeBatteryOS()
+        {
+            List<SmartPhoneOS> large_battery_oses = rest.Get<SmartPhoneOS>("NonCrud/LargeBatteryOS");
+
+            foreach (SmartPhoneOS large_battery_os in large_battery_oses)
+            {
+                Console.WriteLine(large_battery_os);
+            }
+            Console.ReadLine();
+        }
         #endregion
 
         static void Main(string[] args)
@@ -467,8 +486,8 @@ namespace RZ5NJF_HFT_2022231.Client
                 .Add("Delete", () => Delete(data_types_enum.SmartPhoneOS))
                 .Add("Update\n", () => Update(data_types_enum.SmartPhoneOS))
 
-                .Add("The latest operating system of the lowest net worth company", () => Console.WriteLine(" WIP "))
-                .Add("Every operating system that was released on phones with a battery at least 4000 mAh\n", () => Console.WriteLine(" WIP "))
+                .Add("The latest operating system of the lowest net worth company", () => SmallestCompanyLatestOS())
+                .Add("Every operating system that was released on phones with a battery at least 4000 mAh\n", () => LargeBatteryOS())
 
                 .Add("Exit", ConsoleMenu.Close);
 
