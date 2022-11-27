@@ -31,5 +31,17 @@ namespace RZ5NJF_HFT_2022231.Endpoint.Controllers
         {
             return this.phoneLogic.OldestWirelessSamsung();
         }
+
+        [HttpGet]
+        public Company MostpplAndroidMaker()
+        {
+            return this.companyLogic.MostpplAndroidMaker();
+        }
+
+        [HttpGet]
+        public IEnumerable<Company> LatestOsCompany()
+        {
+            return this.smartPhoneOsLogic.LatestOsCompany();
+        }
     }
 }

@@ -393,7 +393,7 @@ namespace RZ5NJF_HFT_2022231.Client
         }
         #endregion
 
-        #region non-CRUD methods
+        #region non-CRUD Methods
         static void SupportedApple()
         {
             List<Phone> supported_apple_phones = rest.Get<Phone>("NonCrud/SupportedApple");
@@ -410,6 +410,26 @@ namespace RZ5NJF_HFT_2022231.Client
             Phone oldest_wireless_samsung = rest.GetSingle<Phone>("NonCrud/OldestWirelessSamsung");
 
             Console.WriteLine(oldest_wireless_samsung);
+            Console.ReadLine();
+        }
+
+        static void MostpplAndroidMaker()
+        {
+            Company most_ppl_android_maker = rest.GetSingle<Company>("NonCrud/MostpplAndroidMaker");
+
+            Console.WriteLine(most_ppl_android_maker);
+            Console.ReadLine();
+        }
+
+        static void LatestOsCompany()
+        {
+            List<Company> latest_os_company = rest.Get<Company>("NonCrud/LatestOsCompany");
+
+            foreach (Company company in latest_os_company)
+            {
+                Console.WriteLine(company);
+            }
+
             Console.ReadLine();
         }
         #endregion
@@ -436,8 +456,8 @@ namespace RZ5NJF_HFT_2022231.Client
                 .Add("Delete", () => Delete(data_types_enum.Company))
                 .Add("Update\n", () => Update(data_types_enum.Company))
 
-                .Add("The largest head count company that made android phones", () => Console.WriteLine(" WIP "))
-                .Add("The company that made the phone with the latest operating system\n", () => Console.WriteLine(" WIP "))
+                .Add("The largest head count company that made at least one android phone", () => MostpplAndroidMaker())
+                .Add("Companys that made a phone with the latest operating system\n", () => LatestOsCompany())
 
                 .Add("Exit", ConsoleMenu.Close);
 

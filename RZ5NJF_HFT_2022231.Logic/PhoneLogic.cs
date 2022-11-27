@@ -55,7 +55,7 @@ namespace RZ5NJF_HFT_2022231.Logic
         }
         #endregion
 
-        #region non-CRUD methods
+        #region non-CRUD Methods
         public IEnumerable<Phone> SupportedApple()
         {
             return this.repo.ReadAll().Where(t => t.Company.Name.ToLower().Contains("apple") && t.SmartPhoneOS.IsSupported);
@@ -63,7 +63,7 @@ namespace RZ5NJF_HFT_2022231.Logic
 
         public Phone OldestWirelessSamsung()
         {
-            return this.repo.ReadAll().Where(t => t.WirelessCharging && t.Company.Name.ToLower().Contains("samsung")).OrderBy(t => t.ReleaseDate).First();
+            return this.repo.ReadAll().OrderBy(t => t.ReleaseDate).FirstOrDefault(t => t.WirelessCharging && t.Company.Name.ToLower().Contains("samsung"));
         }
         #endregion
     }

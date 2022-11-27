@@ -54,5 +54,12 @@ namespace RZ5NJF_HFT_2022231.Logic
             this.repo.Update(os_to_update);
         }
         #endregion
+
+        #region non-CRUD Methods
+        public IEnumerable<Company> LatestOsCompany()
+        {
+            return this.repo.ReadAll().OrderByDescending(t => t.ReleaseDate).First().Phones.Select(t => t.Company);
+        }
+        #endregion
     }
 }

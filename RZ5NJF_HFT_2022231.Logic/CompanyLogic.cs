@@ -62,5 +62,12 @@ namespace RZ5NJF_HFT_2022231.Logic
             this.repo.Update(company_to_update);
         }
         #endregion
+
+        #region non-CRUD Methods
+        public Company MostpplAndroidMaker()
+        {
+            return this.repo.ReadAll().OrderByDescending(t => t.NumberOfEmployees).FirstOrDefault(t=>t.Phones.Count(p => p.SmartPhoneOS.OSFamily.ToLower().Contains("android")) > 0);
+        }
+        #endregion
     }
 }

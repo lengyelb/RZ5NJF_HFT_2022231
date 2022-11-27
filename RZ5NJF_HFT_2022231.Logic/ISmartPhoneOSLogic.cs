@@ -9,10 +9,16 @@ namespace RZ5NJF_HFT_2022231.Logic
 {
     public interface ISmartPhoneOSLogic
     {
+        #region CRUD Methods
         void Create(SmartPhoneOS os_to_create);
         void Delete(int os_to_delete_id);
         SmartPhoneOS Read(int os_to_read_id);
         IQueryable<SmartPhoneOS> ReadAll();
         void Update(SmartPhoneOS os_to_update);
+        #endregion
+
+        #region non-CRUD Methods
+        IEnumerable<Company> LatestOsCompany();
+        #endregion
     }
 }
