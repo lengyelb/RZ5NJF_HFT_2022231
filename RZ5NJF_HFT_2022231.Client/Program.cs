@@ -393,6 +393,10 @@ namespace RZ5NJF_HFT_2022231.Client
         }
         #endregion
 
+        #region non-CRUD methods
+
+        #endregion
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:22184/", "Company");
@@ -403,6 +407,10 @@ namespace RZ5NJF_HFT_2022231.Client
                 .Add("List", () => Read(data_types_enum.Phone))
                 .Add("Delete", () => Delete(data_types_enum.Phone))
                 .Add("Update\n", () => Update(data_types_enum.Phone))
+
+                .Add("Still supported phones made by apple", () => Console.WriteLine(" WIP "))
+                .Add("Oldest samsung phone that supports wirelesss charging\n", () => Console.WriteLine(" WIP "))
+
                 .Add("Exit", ConsoleMenu.Close);
 
             var companys_menu = new ConsoleMenu(args, level: 1)
@@ -410,20 +418,28 @@ namespace RZ5NJF_HFT_2022231.Client
                 .Add("List", () => Read(data_types_enum.Company))
                 .Add("Delete", () => Delete(data_types_enum.Company))
                 .Add("Update\n", () => Update(data_types_enum.Company))
+
+                .Add("The largest head count company that made android phones", () => Console.WriteLine(" WIP "))
+                .Add("The company that made the phone with the latest operating system\n", () => Console.WriteLine(" WIP "))
+
                 .Add("Exit", ConsoleMenu.Close);
 
             var os_menu = new ConsoleMenu(args, level: 1)
                 .Add("Create", () => Create(data_types_enum.SmartPhoneOS))
                 .Add("List", () => Read(data_types_enum.SmartPhoneOS))
                 .Add("Delete", () => Delete(data_types_enum.SmartPhoneOS))
-                .Add("Update", () => Update(data_types_enum.SmartPhoneOS))
+                .Add("Update\n", () => Update(data_types_enum.SmartPhoneOS))
+
+                .Add("The latest operating system of the lowest net worth company", () => Console.WriteLine(" WIP "))
+                .Add("Every operating system that was released on phones with a battery at least 4000 mAh\n", () => Console.WriteLine(" WIP "))
+
                 .Add("Exit", ConsoleMenu.Close);
 
 
             var main_menu = new ConsoleMenu(args, level: 0)
                .Add("Phones", () => phones_menu.Show())
                .Add("Companys", () => companys_menu.Show())
-               .Add("Operating systems", () => os_menu.Show())
+               .Add("Operating systems\n", () => os_menu.Show())
                .Add("Exit", ConsoleMenu.Close);
 
             main_menu.Show();
