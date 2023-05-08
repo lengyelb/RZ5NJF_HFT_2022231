@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RZ5NJF_HFT_2022231.Endpoint.Services;
 using RZ5NJF_HFT_2022231.Logic;
 using RZ5NJF_HFT_2022231.Models;
 using RZ5NJF_HFT_2022231.Repository;

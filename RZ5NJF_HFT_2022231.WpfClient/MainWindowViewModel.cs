@@ -62,7 +62,7 @@ namespace RZ5NJF_HFT_2022231.WpfClient
         {
             if (!IsInDesignMode)
             {
-                Companies = new RestCollection<Company>("http://localhost:22184/", "company");
+                Companies = new RestCollection<Company>("http://localhost:22184/", "company", "hub");
 
                 CreateCompanyCommand = new RelayCommand(() =>
                 {
