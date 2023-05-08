@@ -11,4 +11,9 @@
     <ProjectReference Include="..\RZ5NJF_HFT_2022231.Models\RZ5NJF_HFT_2022231.Models.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.2" />
+	</ItemGroup>
+
 </Project>
