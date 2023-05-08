@@ -40,6 +40,8 @@ namespace RZ5NJF_HFT_2022231.Endpoint
             services.AddTransient<IPhoneLogic, PhoneLogic>();
             services.AddTransient<ISmartPhoneOSLogic, SmartPhoneOSLogic>();
 
+            services.AddSignalR();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -73,6 +75,7 @@ namespace RZ5NJF_HFT_2022231.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }
