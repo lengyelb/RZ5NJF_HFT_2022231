@@ -36,7 +36,7 @@ namespace RZ5NJF_HFT_2022231.Models
         [Range(0, 1000000)]
         public int NumberOfEmployees { get; set; }
 
-        public DateTime Founded { get; set; }
+        public Date Founded { get; set; }
 
         [NotMapped]
         [JsonIgnore]

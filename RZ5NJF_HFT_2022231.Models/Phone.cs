@@ -21,7 +21,7 @@ namespace RZ5NJF_HFT_2022231.Models
         [StringLength(240)]
         public string Series { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public Date ReleaseDate { get; set; }
 
         [StringLength(240)]
         public string DataInput { get; set; }
