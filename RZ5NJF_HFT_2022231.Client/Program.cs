@@ -104,7 +104,7 @@ namespace RZ5NJF_HFT_2022231.Client
                             NetWorth = int.Parse(AskForData("Please enter the net worth of the company (in whole billion dollars):", "You need to enter a number, please try again:", (t => IsNumber(t)))),
                             Headquarters = AskForData("Please enter the headquarter location of the company:", "You need to enter something, please try again:", (t => t != "")),
                             NumberOfEmployees = int.Parse(AskForData("Please enter the number of employyes working at the company:", "You need to enter a number, please try again:", (t => IsNumber(t)))),
-                            Founded = DateTime.Parse(AskForData("Please enter the founding date of the company (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))))
+                            Founded = new Date(DateTime.Parse(AskForData("Please enter the founding date of the company (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t)))))
                         }, "Company");
                         Console.WriteLine("Company sucesfully created!");
                     }
@@ -122,7 +122,7 @@ namespace RZ5NJF_HFT_2022231.Client
                         {
                             Name = AskForData("Please enter the name of the phone:", "You need to enter something, please try again:", (t => t != "")),
                             Series = AskForData("Please enter the series of the phone:", "You need to enter something, please try again:", (t => t != "")),
-                            ReleaseDate = DateTime.Parse(AskForData("Please enter the release date of the phone (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t)))),
+                            ReleaseDate = new Date(DateTime.Parse(AskForData("Please enter the release date of the phone (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))))),
                             DataInput = AskForData("Please enter the connection method used for data (i.e. UDB-C):", "You need to enter something, please try again:", (t => t != "")),
                             BatterySize = int.Parse(AskForData("Please enter the battery size of the phone (in mAh):", "You need to enter a number, please try again:", (t => IsNumber(t)))),
                             WirelessCharging = bool.Parse(AskForData("Please enter if the phone has wireless charging (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t)))),
@@ -144,7 +144,7 @@ namespace RZ5NJF_HFT_2022231.Client
                             Name = AskForData("Please enter the name of the os:", "You need to enter something, please try again:", (t => t != "")),
                             Kernel = AskForData("Please enter the kernel of the os:", "You need to enter something, please try again:", (t => t != "")),
                             OSFamily = AskForData("Please enter the family of the os:", "You need to enter something, please try again:", (t => t != "")),
-                            ReleaseDate = DateTime.Parse(AskForData("Please enter the release date of the os (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t)))),
+                            ReleaseDate = new Date(DateTime.Parse(AskForData("Please enter the release date of the os (yyyy, mm, dd):", "You need to enter a correct date format, please try again:", (t => IsDate(t))))),
                             PackageManager = AskForData("Please enter the package manager of the os (i.e. Google Play Store):", "You need to enter something, please try again:", (t => t != "")),
                             IsSupported = bool.Parse(AskForData("Please enter if the os is still supported (0=no, 1=yes):", "You need to enter the correct format, please try again:", (t => IsBool(t))))
                         }, "SmartPhoneO");
@@ -238,10 +238,10 @@ namespace RZ5NJF_HFT_2022231.Client
                         $"Please enter the updated number of employyes working at the company [current: {company_to_update.NumberOfEmployees}]:",
                         "You need to enter a number, please try again:",
                         (t => IsNumber(t)), true) ?? company_to_update.NumberOfEmployees.ToString());
-                    company_to_update.Founded = DateTime.Parse(AskForData(
+                    company_to_update.Founded = new Date(DateTime.Parse(AskForData(
                         $"Please enter the updated founding date of the company (yyyy, mm, dd) [current: {company_to_update.Founded}]:",
                         "You need to enter a correct date format, please try again:",
-                        (t => IsDate(t)), true) ?? company_to_update.Founded.ToString());
+                        (t => IsDate(t)), true) ?? company_to_update.Founded.ToString()));
 
                     try
                     {
@@ -270,10 +270,10 @@ namespace RZ5NJF_HFT_2022231.Client
                         $"Please enter the new series of the phone [current: {phone_to_update.Series}]:",
                         "You need to enter something, please try again:",
                         (t => t != ""), true) ?? phone_to_update.Series;
-                    phone_to_update.ReleaseDate = DateTime.Parse(AskForData(
+                    phone_to_update.ReleaseDate = new Date(DateTime.Parse(AskForData(
                         $"Please enter the updated release date of the phone (yyyy, mm, dd) [current: {phone_to_update.ReleaseDate}]:",
                         "You need to enter a correct date format, please try again:",
-                        (t => IsDate(t)), true) ?? phone_to_update.ReleaseDate.ToString());
+                        (t => IsDate(t)), true) ?? phone_to_update.ReleaseDate.ToString()));
                     phone_to_update.DataInput = AskForData(
                         $"Please enter the new data input type of the phone [current: {phone_to_update.DataInput}]:",
                         "You need to enter something, please try again:",
@@ -318,10 +318,10 @@ namespace RZ5NJF_HFT_2022231.Client
                         $"Please enter the new family of the oparting system [current: {os_to_update.OSFamily}]:",
                         "You need to enter something, please try again:",
                         (t => t != ""), true) ?? os_to_update.OSFamily;
-                    os_to_update.ReleaseDate = DateTime.Parse(AskForData(
+                    os_to_update.ReleaseDate = new Date(DateTime.Parse(AskForData(
                         $"Please enter the updated release date of the operating system (yyyy, mm, dd) [current: {os_to_update.ReleaseDate}]:",
                         "You need to enter a correct date format, please try again:",
-                        (t => IsDate(t)), true) ?? os_to_update.ReleaseDate.ToString());
+                        (t => IsDate(t)), true) ?? os_to_update.ReleaseDate.ToString()));
                     os_to_update.PackageManager = AskForData(
                         $"Please enter the new package manager of the oparting system [current: {os_to_update.PackageManager}]:",
                         "You need to enter something, please try again:",
