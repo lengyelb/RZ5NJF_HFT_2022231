@@ -28,6 +28,7 @@ namespace RZ5NJF_HFT_2022231.WpfClient
                 {
                     selectedCompany = new Company()
                     {
+                        CompanyID = value.CompanyID,
                         Name = value.Name,
                         CEO = value.CEO,
                         NetWorth = value.NetWorth,
@@ -38,6 +39,7 @@ namespace RZ5NJF_HFT_2022231.WpfClient
                     OnPropertyChanged();
                     (DeleteCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
                     (UpdateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (CreateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
@@ -73,6 +75,10 @@ namespace RZ5NJF_HFT_2022231.WpfClient
                         NumberOfEmployees = SelectedCompany.NumberOfEmployees,
                         Founded = SelectedCompany.Founded
                     });
+                },
+                () =>
+                {
+                    return SelectedCompany != null;
                 });
 
                 UpdateCompanyCommand = new RelayCommand(() =>
