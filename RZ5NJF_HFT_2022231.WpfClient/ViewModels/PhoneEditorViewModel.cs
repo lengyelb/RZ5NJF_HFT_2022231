@@ -38,7 +38,8 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         WirelessCharging = value.WirelessCharging, 
                         CompanyID = value.CompanyID,
                         Company = value.Company,
-                        SmartPhoneOSID = value.SmartPhoneOSID
+                        SmartPhoneOSID = value.SmartPhoneOSID,
+                        SmartPhoneOS = value.SmartPhoneOS
                     };
                     OnPropertyChanged();
                     (DeletePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
@@ -80,7 +81,8 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         WirelessCharging = SelectedPhone.WirelessCharging,
                         CompanyID = SelectedPhone.CompanyID,
                         Company = SelectedPhone.Company,
-                        SmartPhoneOSID = SelectedPhone.SmartPhoneOSID
+                        SmartPhoneOSID = SelectedPhone.SmartPhoneOSID,
+                        SmartPhoneOS = SelectedPhone.SmartPhoneOS
                     });
                 },
                 () =>

@@ -26,7 +26,7 @@ namespace RZ5NJF_HFT_2022231.Models
         [StringLength(240)]
         public string DataInput { get; set; }
 
-        [Range(0, 1000)]
+        [Range(0, 10000)]
         public int BatterySize { get; set; }
 
         public bool WirelessCharging { get; set; }
