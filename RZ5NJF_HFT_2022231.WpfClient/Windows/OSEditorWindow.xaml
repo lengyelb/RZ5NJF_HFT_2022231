@@ -4,9 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RZ5NJF_HFT_2022231.WpfClient.Windows"
+        xmlns:view="clr-namespace:RZ5NJF_HFT_2022231.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="OSEditorWindow" Height="450" Width="800">
+        Title="Operating System Editor" Height="450" Width="800">
+    <Window.DataContext>
+        <view:OSEditorViewModel />
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding SmartPhoneOSes}" SelectedItem="{Binding SelectedSmartPhoneOS}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.Name}" Padding="10"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Kernel" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.Kernel}" Padding="10"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="OS Family" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.OSFamily}" Padding="10"/>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Release Date" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.ReleaseDate}" Padding="10"/>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="Package Manager" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.PackageManager}" Padding="10"/>
+
+                    <Label Grid.Row="5" Grid.Column="0" Content="Still supported" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedSmartPhoneOS.IsSupported}" Padding="10"/>
+                </Grid>
+            </StackPanel>
+            <Button Content="Create Smart Phone OS" Command="{Binding CreateSmartPhoneOSCommand}" Margin="10" Padding="10" />
+            <Button Content="Delete Smart Phone OS" Command="{Binding DeleteSmartPhoneOSCommand}" Margin="10" Padding="10" />
+            <Button Content="Update Smart Phone OS" Command="{Binding UpdateSmartPhoneOSCommand}" Margin="10" Padding="10" />
+        </StackPanel>
     </Grid>
 </Window>
