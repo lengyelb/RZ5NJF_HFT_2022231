@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json.Linq;
 using RZ5NJF_HFT_2022231.Endpoint.Services;
-using RZ5NJF_HFT_2022231.Logic;
+using RZ5NJF_HFT_2022231.Logic.Interface;
 using RZ5NJF_HFT_2022231.Models;
 using System.Collections.Generic;
 
