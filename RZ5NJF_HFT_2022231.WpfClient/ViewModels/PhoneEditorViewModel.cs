@@ -11,11 +11,19 @@ using System.Windows.Input;
 using System.Windows;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json.Linq;
+using System.Xml.Serialization;
 
 namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
 {
     public class PhoneEditorViewModel: ObservableRecipient
     {
+        private void CanExecuteChanged()
+        {
+            (DeletePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
+            (UpdatePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
+            (CreatePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
+        }
+
         public RestCollection<Phone> Phones { get; set; }
 
         private Phone selectedPhone;
@@ -42,9 +50,11 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         SmartPhoneOS = value.SmartPhoneOS
                     };
                     OnPropertyChanged();
-                    (DeletePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (UpdatePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (CreatePhoneCommand as RelayCommand).NotifyCanExecuteChanged();
+                    CanExecuteChanged();
+                }
+                else
+                {
+                    selectedPhone = null;
                 }
             }
         }
@@ -79,10 +89,6 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         DataInput = SelectedPhone.DataInput,
                         BatterySize = SelectedPhone.BatterySize,
                         WirelessCharging = SelectedPhone.WirelessCharging,
-                        CompanyID = SelectedPhone.CompanyID,
-                        Company = SelectedPhone.Company,
-                        SmartPhoneOSID = SelectedPhone.SmartPhoneOSID,
-                        SmartPhoneOS = SelectedPhone.SmartPhoneOS
                     });
                 },
                 () =>
@@ -102,6 +108,8 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                 DeletePhoneCommand = new RelayCommand(() =>
                 {
                     Phones.Delete(SelectedPhone.PhoneID);
+                    SelectedPhone = null;
+                    CanExecuteChanged();
                 },
                 () =>
                 {

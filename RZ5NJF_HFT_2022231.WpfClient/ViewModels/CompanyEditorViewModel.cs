@@ -15,6 +15,12 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
 {
     public class CompanyEditorViewModel: ObservableRecipient
     {
+        private void CanExecuteChanged()
+        {
+            (DeleteCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
+            (UpdateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
+            (CreateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
+        }
         public RestCollection<Company> Companies { get; set; }
 
         private Company selectedCompany;
@@ -37,9 +43,11 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         Founded = value.Founded
                     };
                     OnPropertyChanged();
-                    (DeleteCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (UpdateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (CreateCompanyCommand as RelayCommand).NotifyCanExecuteChanged();
+                    CanExecuteChanged();
+                }
+                else
+                {
+                    selectedCompany = null;
                 }
             }
         }
@@ -93,6 +101,8 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                 DeleteCompanyCommand = new RelayCommand(() =>
                 {
                     Companies.Delete(SelectedCompany.CompanyID);
+                    SelectedCompany = null;
+                    CanExecuteChanged();
                 },
                 () =>
                 {

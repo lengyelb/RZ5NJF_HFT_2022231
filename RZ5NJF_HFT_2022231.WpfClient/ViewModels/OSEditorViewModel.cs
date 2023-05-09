@@ -16,6 +16,12 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
 {
     public class OSEditorViewModel : ObservableRecipient
     {
+        private void CanExecuteChanged()
+        {
+            (DeleteSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
+            (UpdateSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
+            (CreateSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
+        }
         public RestCollection<SmartPhoneOS> SmartPhoneOSes { get; set; }
 
         private SmartPhoneOS selectedSmartPhoneOS;
@@ -38,9 +44,11 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                         IsSupported= value.IsSupported
                     };
                     OnPropertyChanged();
-                    (DeleteSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (UpdateSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
-                    (CreateSmartPhoneOSCommand as RelayCommand).NotifyCanExecuteChanged();
+                    CanExecuteChanged();
+                }
+                else
+                {
+                    selectedSmartPhoneOS = null;
                 }
             }
         }
@@ -94,6 +102,8 @@ namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
                 DeleteSmartPhoneOSCommand = new RelayCommand(() =>
                 {
                     SmartPhoneOSes.Delete(SelectedSmartPhoneOS.SmartPhoneOSID);
+                    SelectedSmartPhoneOS = null;
+                    CanExecuteChanged();
                 },
                 () =>
                 {
