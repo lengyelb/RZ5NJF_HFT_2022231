@@ -4,9 +4,62 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RZ5NJF_HFT_2022231.WpfClient.Windows"
+        xmlns:view="clr-namespace:RZ5NJF_HFT_2022231.WpfClient.ViewModels"
         mc:Ignorable="d"
-        Title="PhoneEditorWindow" Height="450" Width="800">
+        Title="Phone Editor" Height="450" Width="800">
+    <Window.DataContext>
+        <view:PhoneEditorViewModel />
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding Phones}" SelectedItem="{Binding SelectedPhone}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedPhone.Name}" Padding="10"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Series" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedPhone.Series}" Padding="10"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Release Date" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedPhone.ReleaseDate}" Padding="10"/>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Data Input" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedPhone.DataInput}" Padding="10"/>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="Battery Size" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedPhone.BatterySize}" Padding="10"/>
+
+                    <Label Grid.Row="5" Grid.Column="0" Content="Wireless Charging" Background="LightBlue" Padding="10" />
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding SelectedPhone.WirelessCharging}" Padding="10"/>
+                </Grid>
+            </StackPanel>
+            <Button Content="Create Phone" Command="{Binding CreatePhoneCommand}" Margin="10" Padding="10" />
+            <Button Content="Delete Phone" Command="{Binding DeletePhoneCommand}" Margin="10" Padding="10" />
+            <Button Content="Update Phone" Command="{Binding UpdatePhoneCommand}" Margin="10" Padding="10" />
+        </StackPanel>
     </Grid>
 </Window>

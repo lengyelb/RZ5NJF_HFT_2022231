@@ -13,7 +13,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 
 namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
 {
-    internal class CompanyEditorViewModel: ObservableRecipient
+    public class CompanyEditorViewModel: ObservableRecipient
     {
         public RestCollection<Company> Companies { get; set; }
 

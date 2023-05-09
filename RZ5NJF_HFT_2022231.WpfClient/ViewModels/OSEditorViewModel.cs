@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RZ5NJF_HFT_2022231.WpfClient.ViewModels
 {
-    internal class OSEditorViewModel
+    public class OSEditorViewModel
     {
     }
 }
