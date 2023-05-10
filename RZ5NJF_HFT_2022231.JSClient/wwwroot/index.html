@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Company Editor</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Company Catalog</h1>
+
+    <div id="formdiv">
+        <label>Name</label>
+        <input type="text" id="name" />
+
+        <label>CEO</label>
+        <input type="text" id="ceo" />
+
+        <label>Headquarters</label>
+        <input type="text" id="headquarters" />
+
+        <label>Founded</label>
+        <input type="date" id="founded" />
+
+        <label>Employees</label>
+        <input type="number" id="employees" />
+
+        <label>Net Worth</label>
+        <input type="number" id="networth" />
+
+        <button id="create_button" type="button" onclick="create()">Add Company</button>
+        <div id="update_buttons">
+            <button id="update_button" type="button" onclick="update()">Update Company</button>
+            <button id="cancel_button" type="button" onclick="hideupdate()">Cancel</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>CEO</th>
+                <th>Headquarters</th>
+                <th>Founded</th>
+                <th>Employees</th>
+                <th>Net Worth</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea"></tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
