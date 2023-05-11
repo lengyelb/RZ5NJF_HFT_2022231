@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Company Editor</title>
+    <title>Operating Systems Editor</title>
     <!--<link rel="stylesheet" href="../Styles/mainStyle.css" />-->
     <link rel="stylesheet" href="../Styles/companyStyle.css" />
 </head>
@@ -12,30 +12,30 @@
         <a href="../Pages/phones.html">Phones</a>
         <a href="../Pages/operatingsystems.html">Operationg Systems</a>
     </nav>
-    <h1>Companies</h1>
+    <h1>Operating Systems</h1>
 
     <div id="formdiv">
         <label>Name</label>
         <input type="text" id="name" />
 
-        <label>CEO</label>
-        <input type="text" id="ceo" />
+        <label>OS Family</label>
+        <input type="text" id="osfamily" />
 
-        <label>Headquarters</label>
-        <input type="text" id="headquarters" />
+        <label>Kernel</label>
+        <input type="text" id="kernel" />
 
-        <label>Founded</label>
-        <input type="date" id="founded" />
+        <label>Package Manager</label>
+        <input type="text" id="packagemanager" />
 
-        <label>Employees</label>
-        <input type="number" id="employees" />
+        <label>Release Date</label>
+        <input type="date" id="releasedate" />
 
-        <label>Net Worth</label>
-        <input type="number" id="networth" />
+        <label>Supported</label>
+        <input type="checkbox" id="issupported" />
 
-        <button id="create_button" type="button" onclick="create()">Add Company</button>
+        <button id="create_button" type="button" onclick="create()">Add Operating System</button>
         <div id="update_buttons">
-            <button id="update_button" type="button" onclick="update()">Update Company</button>
+            <button id="update_button" type="button" onclick="update()">Update Operating System</button>
             <button id="cancel_button" type="button" onclick="hideupdate()">Cancel</button>
         </div>
     </div>
@@ -45,11 +45,11 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>CEO</th>
-                <th>Headquarters</th>
-                <th>Founded</th>
-                <th>Employees</th>
-                <th>Net Worth</th>
+                <th>OS Family</th>
+                <th>Kernel</th>
+                <th>Package Manager</th>
+                <th>Release Date</th>
+                <th>Supported</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -57,6 +57,6 @@
     </table>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
-    <script src="../Scripts/companyScript.js"></script>
+    <script src="../Scripts/operatingSystemScript.js"></script>
 </body>
 </html>

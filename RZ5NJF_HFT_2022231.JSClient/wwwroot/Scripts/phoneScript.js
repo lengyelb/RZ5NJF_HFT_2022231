@@ -29,6 +29,30 @@ function setupSignalR() {
         getdata();
     });
 
+    connection.on("SmartPhoneOSCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SmartPhoneOSDeleted", (user, message) => {
+        getdata();
+    });
+
+    connection.on("SmartPhoneOSUpdated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("CompanyCreated", (user, message) => {
+        getdata();
+    });
+
+    connection.on("CompanyDeleted", (user, message) => {
+        getdata();
+    });
+
+    connection.on("CompanyUpdated", (user, message) => {
+        getdata();
+    });
+
     connection.onclose(async () => {
         await start();
     });
@@ -96,7 +120,7 @@ function create() {
     let releaseDate = document.getElementById('releasedate').value;
     let dataInput = document.getElementById('datainput').value;
     let batterySize = document.getElementById('batterysize').value;
-    let wirelessCharging = Boolean(document.getElementById('wirelesscharging').checked);
+    let wirelessCharging = document.getElementById('wirelesscharging').checked;
 
     let smartPhoneOSID = -1;
     let companyID = -1;
@@ -174,8 +198,8 @@ function showupdate(id) {
     document.getElementById('datainput').value = phone.dataInput;
     document.getElementById('batterysize').value = phone.batterySize;
     document.getElementById('wirelesscharging').checked = phone.wirelessCharging;
-    document.getElementById('companyid').value = phone.smartPhoneOSID;
-    document.getElementById('osid').value = phone.companyID;
+    document.getElementById('companyid').value = phone.companyID;
+    document.getElementById('osid').value = phone.smartPhoneOSID;
 }
 
 function hideupdate() {
@@ -198,7 +222,7 @@ function update() {
     let releaseDate = document.getElementById('releasedate').value;
     let dataInput = document.getElementById('datainput').value;
     let batterySize = document.getElementById('batterysize').value;
-    let wirelessCharging = Boolean(document.getElementById('wirelesscharging').checked);
+    let wirelessCharging = document.getElementById('wirelesscharging').checked;
 
     let smartPhoneOSID = -1;
     let companyID = -1;
