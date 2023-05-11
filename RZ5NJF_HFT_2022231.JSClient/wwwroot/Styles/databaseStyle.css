@@ -49,7 +49,7 @@ h1 {
     transition: all 0.3s ease-in-out;
 
     border: solid 1px;
-    border-color: var(--secondary-color);
+    border-color: var(--primary-color);
     border-radius: 10px;
 
     margin-top: 10px;
@@ -67,23 +67,29 @@ h1 {
     box-shadow: inset 0px 0px 10px var(--primary-color);
 }
 
-input[type="text"],
-input[type="checkbox"],
-input[type="date"],
-input[type="number"] {
+input {
     background-color: var(--secondary-color);
     color: var(--text-color);
-    border: none;
+
+    border: solid 1px;
+    border-color: var(--primary-color);
     border-radius: 5px;
+
     padding: 10px;
     font-size: 16px;
     font-family: var(--font-family);
+    outline: none;
+}
+
+input:focus{
+    border-color: var(--accent-color);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 16px;
     padding: 5px;
     border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
@@ -114,6 +120,11 @@ input[type="checkbox"]:checked::before {
     position: relative;
     top: -14px;
     left: -5px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 
 ::-webkit-scrollbar {
@@ -188,7 +199,7 @@ table button {
     font-weight: bold;
     
     border: solid 1px;
-    border-color: var(--secondary-color);
+    border-color: var(--primary-color);
     border-radius: 5px;
 
     transition: all 0.3s ease-in-out;
