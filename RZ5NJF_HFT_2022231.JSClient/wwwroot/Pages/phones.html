@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Phone Editor</title>
+    <!--<link rel="stylesheet" href="../Styles/mainStyle.css" />-->
+    <link rel="stylesheet" href="../Styles/companyStyle.css" />
+</head>
+<body>
+    <nav>
+        <a href="../Pages/company.html">Companies</a>
+        <a href="../Pages/phones.html">Phones</a>
+        <a href="../Pages/company.html">Operationg Systems</a>
+    </nav>
+    <h1>Phones</h1>
+
+    <div id="formdiv">
+        <label>Name</label>
+        <input type="text" id="name" />
+
+        <label>Series</label>
+        <input type="text" id="series" />
+
+        <label>Release Date</label>
+        <input type="date" id="releasedate" />
+
+        <label>Data Input</label>
+        <input type="text" id="datainput" />
+
+        <label>Battery Size</label>
+        <input type="number" id="batterysize" />
+
+        <label>Wireless Charging</label>
+        <input type="checkbox" id="wirelesscharging" />
+
+        <label>Company ID</label>
+        <input type="number" id="companyid" />
+
+        <label>OS ID</label>
+        <input type="number" id="osid" />
+
+        <button id="create_button" type="button" onclick="create()">Add Phone</button>
+        <div id="update_buttons">
+            <button id="update_button" type="button" onclick="update()">Update Phone</button>
+            <button id="cancel_button" type="button" onclick="hideupdate()">Cancel</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Series</th>
+                <th>Release Date</th>
+                <th>Data Input</th>
+                <th>Battery Size</th>
+                <th>Wireless Charging</th>
+                <th>Company ID</th>
+                <th>OS ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea"></tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="../Scripts/phoneScript.js"></script>
+</body>
+</html>

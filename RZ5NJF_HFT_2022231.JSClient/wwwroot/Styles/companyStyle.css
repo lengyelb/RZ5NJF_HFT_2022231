@@ -34,12 +34,12 @@
     margin-right: 5px;
 }
 
-#formdiv #update_buttons button + button{
+#formdiv #update_buttons button + button {
     margin-left: 5px;
     margin-right: 0px;
 }
 
-#formdiv label{
+#formdiv label {
     font-weight: bolder;
 }
 
