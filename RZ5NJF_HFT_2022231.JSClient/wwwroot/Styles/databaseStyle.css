@@ -12,6 +12,7 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
+    cursor: default;
 }
 
 #formdiv {
@@ -149,23 +150,12 @@ input[type="checkbox"]:checked::before {
     margin-right: 0px;
 }
 
-/*table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid black;
-}*/
-
 table {
     border-collapse: collapse;
     width: 100%;
     font-family: var(--font-family);
     color: var(--text-color);
 }
-
-/*table th, td {
-    padding: 5px;
-    border: 1px solid black;
-}*/
 
 th, td {
     text-align: center;
